@@ -22,7 +22,10 @@ Gatling is built upon :
 
 # Release Note
 
+* 1.0.1 released on january 9th 2012 : mainly fixing reports generation under Windows
 * 1.0.0 released on december 20th 2011
+
+See [changelog](https://github.com/excilys/gatling/wiki/Changelog)
 
 # Questions, help?
 
