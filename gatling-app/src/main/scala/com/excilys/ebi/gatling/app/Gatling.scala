@@ -18,18 +18,21 @@ package com.excilys.ebi.gatling.app
 import scala.collection.immutable.TreeSet
 import scala.collection.mutable.{ Set => MSet }
 import scala.collection.mutable.{ MultiMap, HashMap }
+import scala.tools.nsc.io.Path.string2path
 import scala.tools.nsc.io.Directory
+
 import org.joda.time.DateTime
-import com.excilys.ebi.gatling.app.interpreter.{ TextScriptInterpreter, ScalaScriptInterpreter }
+
+import com.excilys.ebi.gatling.app.compiler.{ TextScenarioCompiler, ScalaScenarioCompiler, EclipseScenarioCompiler }
 import com.excilys.ebi.gatling.charts.report.ReportsGenerator
 import com.excilys.ebi.gatling.core.config.GatlingFiles.GATLING_SIMULATIONS_FOLDER
 import com.excilys.ebi.gatling.core.config.GatlingConfig
 import com.excilys.ebi.gatling.core.log.Logging
 import com.excilys.ebi.gatling.core.util.DateHelper.printFileNameDate
-import com.excilys.ebi.gatling.core.util.StringHelper.EMPTY
-import com.excilys.ebi.gatling.core.util.FileHelper._
+import com.excilys.ebi.gatling.core.util.FileHelper.{ TXT_EXTENSION, SCALA_EXTENSION }
+
+import CommandLineOptions.options.{ resultsFolder, requestBodiesFolder, reportsOnlyFolder, reportsOnly, noReports, eclipseSimulationPackage, eclipseSimulationFolder, eclipseAssetsFolder, dataFolder, configFileName }
 import scopt.OptionParser
-import com.excilys.ebi.gatling.app.interpreter.EclipseScalaInterpreter
 
 /**
  * Object containing entry point of application
@@ -179,11 +182,11 @@ object Gatling extends Logging {
 		val startDate = DateTime.now
 		val interpreter =
 			if (isEclipse)
-				new EclipseScalaInterpreter
+				new EclipseScenarioCompiler
 			else
 				fileName match {
-					case fn if (fn.endsWith(".scala")) => new ScalaScriptInterpreter
-					case fn if (fn.endsWith(".txt")) => new TextScriptInterpreter
+					case fn if (fn.endsWith(".scala")) => new ScalaScenarioCompiler
+					case fn if (fn.endsWith(".txt")) => new TextScenarioCompiler
 					case _ => throw new UnsupportedOperationException
 				}
 
