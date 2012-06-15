@@ -108,7 +108,6 @@ class ExtendedResponseBuilder(session: Session, checksumChecks: List[HttpCheck],
 
 	def build: Response = {
 		val response = responseBuilder.build
-		responseBuilder.reset
 		if (checksumChecks.isEmpty) response else new ExtendedResponse(response, checksums)
 	}
 }
