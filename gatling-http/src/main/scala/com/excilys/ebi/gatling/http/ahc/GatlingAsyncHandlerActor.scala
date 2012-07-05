@@ -130,7 +130,7 @@ class GatlingAsyncHandlerActor(var session: Session, checks: List[HttpCheck[_]],
 	private def logRequest(requestResult: RequestStatus,
 		response: ExtendedResponse,
 		requestMessage: Option[String] = None) = {
-		DataWriter.logRequest(session.scenarioName, session.userId, requestName,
+		DataWriter.logRequest(session.scenarioName, session.userId, "Request " + requestName,
 			response.executionStartDate, response.executionEndDate, response.requestSendingEndDate, response.responseReceivingStartDate,
 			requestResult, requestMessage, extractExtraInfo(response))
 	}

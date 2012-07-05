@@ -36,8 +36,8 @@ object ReportsGenerator extends Logging {
 
 			val requestLinks: Iterable[(String, Option[String], String)] = dataReader.requestNames.map {
 				requestName =>
-					val title = if (requestName.length > maxLength) Some(requestName) else None
-					val printedName = if (requestName.length > maxLength) requestName.substring(maxLength) + "..." else requestName
+					val title = if (requestName.length > maxLength) Some(requestName.substring(8)) else None
+					val printedName = if (requestName.length > maxLength) requestName.substring(8, maxLength) + "..." else requestName.substring(8)
 					(formatToFilename(requestName) + HTML_EXTENSION, title, printedName)
 			}
 

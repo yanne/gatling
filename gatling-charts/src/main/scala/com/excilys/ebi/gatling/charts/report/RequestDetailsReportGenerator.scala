@@ -117,7 +117,7 @@ class RequestDetailsReportGenerator(runOn: String, dataReader: DataReader, compo
 
 			// Create template
 			val template =
-				new RequestDetailsPageTemplate(requestName,
+				new RequestDetailsPageTemplate(requestName.substring(8),
 					responseTimeChartComponent,
 					responseTimeDistributionChartComponent,
 					latencyChartComponent,
