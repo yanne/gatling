@@ -272,9 +272,7 @@ class Gatling(cliOptions: Options) extends Logging {
 			println("Please open the following file : " + globalFile(runUuid))
 
 		} catch {
-			case e =>
-				error(e)
-				println("Reports weren't generated")
+			case e => error("Reports weren't generated", e)
 		}
 	}
 }
