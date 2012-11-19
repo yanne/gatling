@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 
-import com.excilys.ebi.gatling.core.check.extractor.jsonpath.JsonExtractorSpec.extractor
+import com.excilys.ebi.gatling.core.config.GatlingConfiguration
 
 @RunWith(classOf[JUnitRunner])
 class JsonExtractorSpec extends Specification {
