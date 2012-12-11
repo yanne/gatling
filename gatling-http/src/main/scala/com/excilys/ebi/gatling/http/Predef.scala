@@ -22,9 +22,10 @@ import com.excilys.ebi.gatling.http.check.bodypart.HttpChecksumCheckBuilder
 import com.excilys.ebi.gatling.http.check.header.{ HttpHeaderCheckBuilder, HttpHeaderRegexCheckBuilder }
 import com.excilys.ebi.gatling.http.check.status.{ CurrentLocationCheckBuilder, HttpStatusCheckBuilder }
 import com.excilys.ebi.gatling.http.config.{ HttpProtocolConfiguration, HttpProtocolConfigurationBuilder, HttpProxyBuilder }
-import com.excilys.ebi.gatling.http.request.builder.{ AbstractHttpRequestBuilder, HttpRequestBaseBuilder }
+import request.builder.{AbstractHttpRequestBuilder, HttpRequestBaseBuilder, WebSocketBaseBuilder}
 import com.excilys.ebi.gatling.http.response.ExtendedResponse
 import com.excilys.ebi.gatling.http.action.HttpRequestActionBuilder
+import com.excilys.ebi.gatling.http.util.{DefaultRequestLogger, DefaultWebSocketClient}
 
 object Predef {
 	type Request = com.ning.http.client.Request
@@ -60,4 +61,8 @@ object Predef {
 	val responseContentType = (response: ExtendedResponse) => List(response.getContentType)
 	val responseContentLength = (response: ExtendedResponse) => List(response.getHeader(Headers.Names.CONTENT_LENGTH))
 	val responseUri = (response: ExtendedResponse) => List(response.getUri.toString)
+
+  def websocket(attributeName: String) = WebSocketBaseBuilder.websocket(attributeName)
+  implicit val defaultWebSocketClient = DefaultWebSocketClient
+  implicit val defaultRequestLogger = DefaultRequestLogger
 }
