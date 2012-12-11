@@ -22,7 +22,7 @@ import com.excilys.ebi.gatling.http.check.bodypart.HttpChecksumCheckBuilder
 import com.excilys.ebi.gatling.http.check.header.{ HttpHeaderCheckBuilder, HttpHeaderRegexCheckBuilder }
 import com.excilys.ebi.gatling.http.check.status.{ CurrentLocationCheckBuilder, HttpStatusCheckBuilder }
 import com.excilys.ebi.gatling.http.config.{ HttpProtocolConfiguration, HttpProtocolConfigurationBuilder, HttpProxyBuilder }
-import request.builder.{AbstractHttpRequestBuilder, HttpRequestBaseBuilder, WebSocketBaseBuilder}
+import com.excilys.ebi.gatling.http.request.builder.{AbstractHttpRequestBuilder, HttpRequestBaseBuilder, WebSocketBaseBuilder}
 import com.excilys.ebi.gatling.http.response.ExtendedResponse
 import com.excilys.ebi.gatling.http.action.HttpRequestActionBuilder
 import com.excilys.ebi.gatling.http.util.{DefaultRequestLogger, DefaultWebSocketClient}
