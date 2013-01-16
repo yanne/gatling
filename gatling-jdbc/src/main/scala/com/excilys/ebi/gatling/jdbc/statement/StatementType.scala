@@ -13,12 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.excilys.ebi.gatling.http
+package com.excilys.ebi.gatling.jdbc.statement
 
-import com.excilys.ebi.gatling.core.session.Session
-import com.ning.http.client.Request
-
-package object response {
-
-	type ExtendedResponseBuilderFactory = (Request, Session) => ExtendedResponseBuilder
-}
+sealed trait StatementType
+case object QUERY extends StatementType
+case object CALL extends StatementType

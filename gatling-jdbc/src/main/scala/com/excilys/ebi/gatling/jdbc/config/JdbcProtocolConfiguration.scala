@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.excilys.ebi.gatling.http
+package com.excilys.ebi.gatling.jdbc.config
 
-import com.excilys.ebi.gatling.core.session.Session
-import com.ning.http.client.Request
+import com.excilys.ebi.gatling.core.config.ProtocolConfiguration
 
-package object response {
+case object JdbcProtocolConfiguration extends ProtocolConfiguration {
 
-	type ExtendedResponseBuilderFactory = (Request, Session) => ExtendedResponseBuilder
+	val JDBC_PROTOCOL_TYPE = "jdbcProtocol"
+	val protocolType = JdbcProtocolConfiguration.JDBC_PROTOCOL_TYPE
+
 }

@@ -13,12 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.excilys.ebi.gatling.http
+package com.excilys.ebi.gatling.jdbc.util
 
-import com.excilys.ebi.gatling.core.session.Session
-import com.ning.http.client.Request
+import java.sql.Connection
 
-package object response {
+import com.excilys.ebi.gatling.jdbc.statement.builder.AbstractJdbcStatementBuilder
 
-	type ExtendedResponseBuilderFactory = (Request, Session) => ExtendedResponseBuilder
+object StatementBundle {
+	def apply(name: String,builder : AbstractJdbcStatementBuilder[_],params: List[Any]) = new StatementBundle(name,builder,params)
+}
+
+class StatementBundle(val name : String,builder: AbstractJdbcStatementBuilder[_],params: List[Any]) {
+
+	def buildStatement(connection: Connection) = {
+		val statement = builder.build(connection)
+		val indexes = 1 to params.length
+		indexes.zip(params).map{case (index,param) => statement.setObject(index,param)}
+		statement
+	}
 }

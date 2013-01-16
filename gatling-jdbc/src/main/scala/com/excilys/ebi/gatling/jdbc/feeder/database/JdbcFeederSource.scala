@@ -46,4 +46,5 @@ object JdbcFeederSource {
 			loadRec(Vector.empty).toArray
 		}
 	}
+
 }

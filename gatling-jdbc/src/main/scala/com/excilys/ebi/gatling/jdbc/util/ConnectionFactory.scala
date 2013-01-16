@@ -13,12 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.excilys.ebi.gatling.http
+package com.excilys.ebi.gatling.jdbc.util
 
-import com.excilys.ebi.gatling.core.session.Session
-import com.ning.http.client.Request
+import org.apache.tomcat.jdbc.pool.DataSource
+import java.sql.SQLException
 
-package object response {
+object ConnectionFactory {
 
-	type ExtendedResponseBuilderFactory = (Request, Session) => ExtendedResponseBuilder
+	private[jdbc] var dataSource : DataSource = _
+
+	private[jdbc] def setDataSource(ds: DataSource) { dataSource = ds }
+
+	private[jdbc] def getConnection =
+		if(dataSource != null)
+			dataSource.getConnection
+		else
+			throw new SQLException("DataSource is not configured.")
+
+	private[jdbc] def close = if (dataSource != null ) dataSource.close
 }

@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.excilys.ebi.gatling.http
+package com.excilys.ebi.gatling.jdbc.statement.builder
 
-import com.excilys.ebi.gatling.core.session.Session
-import com.ning.http.client.Request
+import com.excilys.ebi.gatling.core.session.Expression
+import com.excilys.ebi.gatling.jdbc.statement.CALL
 
-package object response {
+object CallJdbcStatementBuilder {
 
-	type ExtendedResponseBuilderFactory = (Request, Session) => ExtendedResponseBuilder
+	def apply(statementName: Expression[String],statement: String) = new CallJdbcStatementBuilder(JdbcAttributes(statementName,statement,CALL,Nil))
+}
+
+class CallJdbcStatementBuilder(jdbcAttributes: JdbcAttributes) extends AbstractJdbcStatementBuilder[CallJdbcStatementBuilder](jdbcAttributes) {
+
+	private[jdbc] def newInstance(jdbcAttributes: JdbcAttributes) = new CallJdbcStatementBuilder(jdbcAttributes)
 }

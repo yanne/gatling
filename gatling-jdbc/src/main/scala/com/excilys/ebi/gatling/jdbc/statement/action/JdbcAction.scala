@@ -13,12 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.excilys.ebi.gatling.http
+package com.excilys.ebi.gatling.jdbc.statement.action
 
+import com.excilys.ebi.gatling.core.action.{ Action, Bypassable }
 import com.excilys.ebi.gatling.core.session.Session
-import com.ning.http.client.Request
+import com.excilys.ebi.gatling.jdbc.statement.builder.AbstractJdbcStatementBuilder
 
-package object response {
+abstract class JdbcAction extends Action with Bypassable {
 
-	type ExtendedResponseBuilderFactory = (Request, Session) => ExtendedResponseBuilder
+	def resolveQuery(builder: AbstractJdbcStatementBuilder[_],session: Session) = {
+		for {
+			name <- builder.statementName(session)
+			paramsList <- builder.resolveParams(session)
+		} yield (name,paramsList)
+	}
 }
